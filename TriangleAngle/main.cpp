@@ -60,8 +60,8 @@ void endWithError(const string& error) {
 }
 
 void finishProgram() {
-    cin.clear();
-    cin.get();
+    short i;
+    cin >> i;
 
     exit(0);
 }
