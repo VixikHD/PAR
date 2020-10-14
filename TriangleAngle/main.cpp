@@ -1,6 +1,8 @@
 #include <iostream>
+#include <sstream>
 #include "cmath"
 #include "string"
+#include "cstdlib"
 
 using namespace std;
 
@@ -40,7 +42,8 @@ int main() {
     cout << "Alfa = " << rad2Deg(alfaRad) << "\n";
     cout << "Beta = " << rad2Deg(betaRad) << "\n";
     cout << "Gama = " << rad2Deg(gamaRad) << "\n";
-    return 0;
+
+    finishProgram();
 }
 
 string rad2Deg(double radians) {
@@ -51,7 +54,10 @@ string rad2Deg(double radians) {
     minutes = (int) ((((180 * radians) / PI) - degrees) * 60);
     seconds = (((((180 * radians) / PI) - degrees) * 60) - minutes) * 60;
 
-    return to_string(degrees) + " Stupnu " + to_string(minutes) + " Minut a " + to_string(seconds) + " Sekund";
+    stringstream stringStream; // omlovuam se, pouzival jsem novejsi verzi c++
+    stringStream << degrees << " Stupnu " << minutes << " Minut a " << seconds << " Sekund";
+
+    return stringStream.str();
 }
 
 void endWithError(const string& error) {
@@ -68,7 +74,6 @@ void finishProgram() {
 
 void validateInput() {
     if(cin.fail()) {
-        cout << "Zadana spatna hodnota!\nUkoncuji program...";
-        finishProgram();
+        endWithError("Zadana spatna hodnota!");
     }
 }
