@@ -3,6 +3,7 @@
 #include <algorithm>
 
 void finishProcess();
+void sort(int array[], int length);
 
 int main() {
     std::cout << "Number Generator: Enter number count to generate:" << std::endl;
@@ -64,9 +65,12 @@ int main() {
     std::cout << "Average: " << (((double) all) / ((double)length)) << std::endl << std::endl;
 
     // E) Even/odd number count
-    std::cout << "E) Calculate even and odd number count:" << std::endl;
-    int even = 0, odd = 0;
+    std::cout << "E) Calculate zero, even and odd number count:" << std::endl;
+    int even = 0, odd = 0, zeros = 0;
     for(int i = 0; i < length; i++) {
+        if(array[i] == 0) {
+            zeros++;
+        }
         if(array[i] % 2 == 0) {
             even++;
         } else {
@@ -74,11 +78,12 @@ int main() {
         }
     }
     std::cout << "Even number count: " << even << std::endl;
-    std::cout << "Odd number count: " << odd << std::endl << std::endl;
+    std::cout << "Odd number count: " << odd << std::endl;
+    std::cout << "Zero values count: " << odd << std::endl << std::endl;
 
     // F) Sort it and print again
     std::cout << "F) Print numbers in ascending order and in descending order:" << std::endl;
-    std::sort(array, array + length);
+    sort(array, length);
 
     std::cout << "Ascending order:" << std::endl;
     std::cout << "array(" << length << ") {" << std::endl;
@@ -96,8 +101,23 @@ int main() {
 
     std::cout << "Done! Press [Enter] to exit." << std::endl;
     return 0;
-    
-    finishProcess();
+}
+
+void sort(int array[], int len) {
+    bool sorted = false;
+    int temp;
+
+    while (!sorted) {
+        sorted = true;
+        for(int i = 0; i < len; i++) {
+            if(i + 1 < len && array[i] > array[i + 1]) {
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+                sorted = false;
+            }
+        }
+    }
 }
 
 void finishProcess() {
